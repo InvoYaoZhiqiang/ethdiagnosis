@@ -810,6 +810,7 @@ Std_ReturnType SoAd_SetUniqueRemoteAddr
 
 void SoAd_ReleaseRemoteAddr(SoAd_SoConIdType SoConId )
 {
+	SoConId = DEF_SOCONID;
 }
 
 /*============================== SoAd communication. ====================================*/
