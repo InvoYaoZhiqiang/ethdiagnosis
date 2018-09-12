@@ -2284,7 +2284,7 @@ void DoIP_ActivationLineSwitchActive(void)
 	   第一个调用类型设置为TCPIP_IPADDR_ASSIGNMENT_LINKLOCAL_DOIP，
 	   第二个调用类型设置为TCPIP_IPADDR_ASSIGNMENT_DHCP。 */
 
-#if (ENABLE_TCP==1)
+#if ENABLE_TCP
 
 
 	/* --------------TCP----------------------- */
@@ -2387,20 +2387,11 @@ void DoIP_ActivationLineSwitchInactive(void)
 ====================================================================*/
 void DoIP_MainFunction(void)
 {
-	static boolean startflg = 0;
 	static uint16 numAnnouncements = 3;
 	uint16 i = 0;
 	uint32 timer = 0;
-
-#if DEBUG_SWITCH	
-	if (0 == startflg)
-	{
-		startflg = 1;
-		DoIP_ActivationLineSwitchActive();
-	}
-#endif
-
-	//PR_DEBUG(DEBUG_SWITCH, "LinkStatus: %s\n", LinkStatus == DOIP_LINK_UP ? "DOIP_LINK_UP" : "DOIP_LINK_DOWN");
+    
+	PR_DEBUG(DEBUG_SWITCH, "LinkStatus: %s\n", LinkStatus == DOIP_LINK_UP ? "DOIP_LINK_UP" : "DOIP_LINK_DOWN");
 	if (DOIP_LINK_UP == LinkStatus) 
 	{
 		DoIp_AnnouncementTimer += DOIP_MAINFUNCTIONPERIOD;

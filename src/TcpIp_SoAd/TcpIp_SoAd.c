@@ -283,9 +283,12 @@ Std_ReturnType TcpIp_Bind
 )
 {
 	SOCKET s = (SOCKET)Local_SocketId[SocketId - 1];
+    
+    #if 0
 	uint32 len = 0;
 	PSA	   pName;
-	
+	#endif
+    
 	/* Check the PortPtr. */
 	if(!PortPtr)
 		return E_NOT_OK;
@@ -316,8 +319,12 @@ Std_ReturnType TcpIp_TcpConnect
 ) 
 {
 	SOCKET s = (SOCKET)Local_SocketId[SocketId - 1];
+    
+    #if 0
 	PSA pName;
 	uint32 len = 0;
+    #endif
+    
     #if 0
 	pName = (PSA)RemoteAddrPtr;
 	len = sizeof(*pName);
@@ -411,7 +418,7 @@ Std_ReturnType TcpIp_TcpReceived
 	nbytes = recv(s, (void *)DataPtr, Length, flags);	
 	if(nbytes < 0)
 	{
-		PR_DEBUG(TRUE, "TcpIp_TcpReceived errno:%d\n", fdError());
+		PR_DEBUG(DEBUG_SWITCH, "TcpIp_TcpReceived errno:%d\n", fdError());
 		return E_NOT_OK;
 	}
 	
